@@ -1,7 +1,7 @@
-package gg.scala.sync
+package gg.scala.weblink
 
-import gg.scala.sync.api.user.UserApiHandler
-import gg.scala.sync.model.WebsitePlayerScheme
+import gg.scala.weblink.api.user.UserApiHandler
+import gg.scala.weblink.model.WebsitePlayerScheme
 import gg.scala.commons.ExtendedScalaPlugin
 import gg.scala.commons.annotations.container.ContainerDisable
 import gg.scala.commons.annotations.container.ContainerEnable
@@ -12,7 +12,7 @@ import io.github.nosequel.data.connection.mongo.NoAuthMongoConnectionPool
 import org.bukkit.Bukkit
 
 @Plugin(
-    name = "WebSync",
+    name = "scala-weblink",
     version = "%remote%/%branch%/%id%"
 
 )
@@ -21,10 +21,9 @@ import org.bukkit.Bukkit
 @PluginDependencyComposite(
     PluginDependency("scala-commons"),
     PluginDependency("Lemon"),
-    PluginDependency("Cookie", soft = true),
     PluginDependency("cloudsync", soft = true)
 )
-class WebSyncPlugin : ExtendedScalaPlugin()
+class WebLinkPlugin : ExtendedScalaPlugin()
 {
 
     @ContainerEnable

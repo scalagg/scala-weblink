@@ -1,4 +1,4 @@
-package gg.scala.sync.api
+package gg.scala.weblink.api
 
 val EMAIL_REGEX =
     "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$".toRegex(RegexOption.IGNORE_CASE)

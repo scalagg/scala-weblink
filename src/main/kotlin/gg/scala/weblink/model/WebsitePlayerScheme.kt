@@ -1,4 +1,4 @@
-package gg.scala.sync.model
+package gg.scala.weblink.model
 
 import gg.scala.lemon.LemonConstants
 import gg.scala.lemon.player.LemonPlayer

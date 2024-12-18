@@ -10,12 +10,19 @@ plugins {
     id("org.ajoberstar.grgit") version "4.1.1"
 }
 
-group = "gg.scala"
-version = "1.0-SNAPSHOT"
+var currentBranch: String = grgit.branch.current().name
 
-repositories {
-    mavenCentral()
-    repositories.configureScalaRepository()
+allprojects {
+    group = "gg.scala.weblink"
+    version = "1.0.1${
+        if (currentBranch == "develop") "-dev" else ""
+    }"
+
+    repositories {
+        mavenCentral()
+        maven("https://repo.codemc.io/repository/maven-snapshots/")
+        configureScalaRepository()
+    }
 }
 
 dependencies {
@@ -29,17 +36,37 @@ dependencies {
     compileOnly("gg.scala.basics.plugin:scala-basics-plugin:1.0.5")
 }
 
-tasks.test {
-    useJUnitPlatform()
+kotlin {
+    jvmToolchain(jdkVersion = 17)
 }
 
-kotlin {
-    jvmToolchain(17)
+tasks.withType<ShadowJar> {
+    archiveClassifier.set("")
+    exclude(
+        "**/*.kotlin_metadata",
+        "**/*.kotlin_builtins",
+        "META-INF/"
+    )
+
+    archiveFileName.set(
+        "scala-weblink.jar"
+    )
+}
+
+tasks.withType<JavaCompile> {
+    options.compilerArgs.add("-parameters")
+    options.fork()
+    options.encoding = "UTF-8"
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.javaParameters = true
+    kotlinOptions.jvmTarget = "17"
 }
 
 publishing {
     repositories.configureScalaRepository(
-        dev = version.toString().endsWith("-dev")
+        dev = currentBranch == "develop"
     )
 
     publications {
@@ -51,14 +78,16 @@ publishing {
     }
 }
 
-tasks.getByName("build").dependsOn(
-    "shadowJar",
-    "publishMavenJavaPublicationToScalaRepository"
-)
+tasks.getByName("build")
+    .dependsOn(
+        "shadowJar",
+        "publishMavenJavaPublicationToScalaRepository"
+    )
 
-fun RepositoryHandler.configureScalaRepository(dev: Boolean = false) {
-    maven("https://artifactory.scala.gg/gradle-release") {
-        name = "scalaGradleRelease"
+fun RepositoryHandler.configureScalaRepository(dev: Boolean = false)
+{
+    maven("${property("artifactory_contextUrl")}/gradle-${if (dev) "dev" else "release"}") {
+        name = "scala"
         credentials {
             username = property("artifactory_user").toString()
             password = property("artifactory_password").toString()

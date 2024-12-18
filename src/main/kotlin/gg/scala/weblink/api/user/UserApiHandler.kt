@@ -1,7 +1,7 @@
-package gg.scala.sync.api.user
+package gg.scala.weblink.api.user
 
-import gg.scala.sync.api.BASE_API_URL
-import gg.scala.sync.api.USER_AGENT
+import gg.scala.weblink.api.BASE_API_URL
+import gg.scala.weblink.api.USER_AGENT
 import gg.scala.lemon.Lemon
 import gg.scala.lemon.handler.PlayerHandler
 import gg.scala.lemon.player.punishment.category.PunishmentCategory

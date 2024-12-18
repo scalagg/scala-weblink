@@ -1,7 +1,7 @@
-package gg.scala.sync.listener
+package gg.scala.weblink.listener
 
-import gg.scala.sync.api.registration.RegistrationHandler
-import gg.scala.sync.api.user.UserApiHandler
+import gg.scala.weblink.api.registration.RegistrationHandler
+import gg.scala.weblink.api.user.UserApiHandler
 import gg.scala.commons.annotations.Listeners
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
