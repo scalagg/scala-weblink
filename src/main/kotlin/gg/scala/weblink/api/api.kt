@@ -8,7 +8,7 @@ const val USER_AGENT =
 
 
 const val API_URL =
-    "http://100.82.132.12:8081/forum/account/sendRegistration/%s"
+    "http://100.125.41.103:8081/forum/account/sendRegistration/%s"
 
 const val API_TOKEN =
     "Mmvb500e9cZShvMgxnI44XGjyzIXOX5a"
